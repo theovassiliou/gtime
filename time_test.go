@@ -298,6 +298,8 @@ func TestHFFDistanceApart(t *testing.T) {
 		{"yesterday", today.AddDate(0, 0, -1)},
 		{"day after tomorrow", today.AddDate(0, 0, 2)},
 		{"day before yesterday", today.AddDate(0, 0, -2)},
+		{"3 days ago", today.AddDate(0, 0, -3)},
+		{"3 days", today.AddDate(0, 0, 3)},
 	}
 
 	for _, tt := range tests {
