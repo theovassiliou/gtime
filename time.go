@@ -87,3 +87,21 @@ func absDiffInt(x, y int) int {
 	}
 	return x - y
 }
+
+// FractionOfMonthElapsed returns the fraction of the month that has past, since the first of month.
+// At the first of the month it returns 0 as no day has past.
+// On the last day of a month it returns a value around 0.96 as there is still one day left in the month.
+// So the value 1 is never returned. The results is
+// rounded to two decimal digit. Hours within now are not taken into consideration.
+func FractionOfMonthElapsed(now time.Time) float64 {
+	currentYear, currentMonth, currentDay := now.Date()
+	currentLocation := now.Location()
+
+	firstOfMonth := time.Date(currentYear, currentMonth, 1, 0, 0, 0, 0, currentLocation)
+	lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+
+	_, _, daysOfMonth := lastOfMonth.Date()
+
+	fraction := float64(currentDay-1) / float64(daysOfMonth)
+	return math.Round(fraction*100) / 100
+}

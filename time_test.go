@@ -512,3 +512,85 @@ func ExampleHFFDistanceApart() {
 	// event1 will happen tomorrow
 	// event2 will happen 31 days
 }
+
+func TestFractionOfMonthPast(t *testing.T) {
+	type args struct {
+		t time.Time
+	}
+	tests := []struct {
+		name string
+		args args
+		want float64
+	}{
+		{
+			name: "start of march",
+			args: args{
+				t: time.Date(2022, 3, 1, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0,
+		},
+		{
+			name: "second of march",
+			args: args{
+				t: time.Date(2022, 3, 2, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.03,
+		},
+		{
+			name: "mid of march",
+			args: args{
+				t: time.Date(2022, 3, 16, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.48,
+		},
+		{
+			name: "end of march",
+			args: args{
+				t: time.Date(2022, 3, 31, 23, 59, 59, 0, time.Now().Location()),
+			},
+			want: 0.97,
+		},
+		{
+			name: "end of feb",
+			args: args{
+				t: time.Date(2022, 2, 28, 23, 59, 59, 0, time.Now().Location()),
+			},
+			want: 0.96,
+		},
+		{
+			name: "mid of feb",
+			args: args{
+				t: time.Date(2022, 2, 15, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.5,
+		},
+		{
+			name: "mid of april",
+			args: args{
+				t: time.Date(2022, 4, 16, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.5,
+		},
+		{
+			name: "two third of april",
+			args: args{
+				t: time.Date(2022, 4, 21, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.67,
+		},
+		{
+			name: "three quarter of april",
+			args: args{
+				t: time.Date(2022, 4, 23, 0, 0, 0, 0, time.Now().Location()),
+			},
+			want: 0.73,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FractionOfMonthElapsed(tt.args.t); got != tt.want {
+				t.Errorf("FractionOfMonthPast() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
