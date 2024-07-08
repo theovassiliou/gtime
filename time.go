@@ -105,3 +105,151 @@ func FractionOfMonthElapsed(now time.Time) float64 {
 	fraction := float64(currentDay-1) / float64(daysOfMonth)
 	return math.Round(fraction*100) / 100
 }
+
+// EndOfMonth returns the time.Time value representing the end of the specified month.
+
+func EndOfMonth(year int, month int) time.Time {
+	t := time.Date(year, time.Month(month+1), 0, 23, 59, 59, 0, time.UTC)
+	return t
+}
+
+// StartOfMonth returns the time.Time value representing the start of the specified month.
+func StartOfMonth(year int, month int) time.Time {
+	t := time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC)
+	return t
+}
+
+// StartOfNextMonth returns the time.Time value representing the start of the next month.
+func StartOfNextMonth(year int, month int) time.Time {
+	t := time.Date(year, time.Month(month+1), 1, 0, 0, 0, 0, time.UTC)
+	return t
+}
+
+// StartOfPreviousMonth returns the time.Time value representing the start of the previous month.
+func StartOfPreviousMonth(year int, month int) time.Time {
+	t := time.Date(year, time.Month(month-1), 1, 0, 0, 0, 0, time.UTC)
+	return t
+}
+
+// StartOfPreviousYear returns the time.Time value representing the start of the previous year.
+func StartOfPreviousYear(year int) time.Time {
+	t := time.Date(year-1, time.January, 1, 0, 0, 0, 0, time.UTC)
+	return t
+}
+
+// EndOfDay returns the time.Time value representing the end of the specified day.
+func EndOfDay(year int, month int, day int) time.Time {
+	t := time.Date(year, time.Month(month), day, 23, 59, 59, 0, time.UTC)
+	return t
+}
+
+// StartOfDay returns the time.Time value representing the start of the specified day.
+func StartOfDay(year int, month int, day int) time.Time {
+	t := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
+	return t
+}
+
+// EndOfHour returns the time.Time value representing the end of the specified hour.
+func EndOfHour(year int, month int, day int, hour int) time.Time {
+	t := time.Date(year, time.Month(month), day, hour, 59, 59, 0, time.UTC)
+	return t
+}
+
+// StartOfHour returns the time.Time value representing the start of the specified hour.
+func StartOfHour(year int, month int, day int, hour int) time.Time {
+	t := time.Date(year, time.Month(month), day, hour, 0, 0, 0, time.UTC)
+	return t
+}
+
+// EndOfMinute returns the time.Time value representing the end of the specified minute.
+func EndOfMinute(year int, month int, day int, hour int, minute int) time.Time {
+	t := time.Date(year, time.Month(month), day, hour, minute, 59, 0, time.UTC)
+	return t
+}
+
+// StartOfMinute returns the time.Time value representing the start of the specified minute.
+func StartOfMinute(year int, month int, day int, hour int, minute int) time.Time {
+	t := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC)
+	return t
+}
+
+// EndOfMonthTime returns the time.Time value representing the end of the specified month.
+func EndOfMonthTime(now time.Time) time.Time {
+	year, month, _ := now.Date()
+	t := time.Date(year, month+1, 0, 23, 59, 59, 0, now.Location())
+	return t
+}
+
+// StartOfMonthTime returns the time.Time value representing the start of the specified month.
+func StartOfMonthTime(now time.Time) time.Time {
+	year, month, _ := now.Date()
+	t := time.Date(year, month, 1, 0, 0, 0, 0, now.Location())
+	return t
+}
+
+// StartOfNextMonthTime returns the time.Time value representing the start of the next month.
+func StartOfNextMonthTime(now time.Time) time.Time {
+	year, month, _ := now.Date()
+	t := time.Date(year, month+1, 1, 0, 0, 0, 0, now.Location())
+	return t
+}
+
+// StartOfPreviousMonthTime returns the time.Time value representing the start of the previous month.
+func StartOfPreviousMonthTime(now time.Time) time.Time {
+	year, month, _ := now.Date()
+	t := time.Date(year, month-1, 1, 0, 0, 0, 0, now.Location())
+	return t
+}
+
+// StartOfPreviousYearTime returns the time.Time value representing the start of the previous year.
+func StartOfPreviousYearTime(now time.Time) time.Time {
+	year, _, _ := now.Date()
+	t := time.Date(year-1, time.January, 1, 0, 0, 0, 0, now.Location())
+	return t
+}
+
+// EndOfDayTime returns the time.Time value representing the end of the specified day.
+func EndOfDayTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	t := time.Date(year, month, day, 23, 59, 59, 0, now.Location())
+	return t
+}
+
+// StartOfDayTime returns the time.Time value representing the start of the specified day.
+func StartOfDayTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	t := time.Date(year, month, day, 0, 0, 0, 0, now.Location())
+	return t
+}
+
+// EndOfHourTime returns the time.Time value representing the end of the specified hour.
+func EndOfHourTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	hour := now.Hour()
+	t := time.Date(year, month, day, hour, 59, 59, 0, now.Location())
+	return t
+}
+
+// StartOfHourTime returns the time.Time value representing the start of the specified hour.
+func StartOfHourTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	hour := now.Hour()
+	t := time.Date(year, month, day, hour, 0, 0, 0, now.Location())
+	return t
+}
+
+// EndOfMinuteTime returns the time.Time value representing the end of the specified minute.
+func EndOfMinuteTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	hour, minute := now.Hour(), now.Minute()
+	t := time.Date(year, month, day, hour, minute, 59, 0, now.Location())
+	return t
+}
+
+// StartOfMinuteTime returns the time.Time value representing the start of the specified minute.
+func StartOfMinuteTime(now time.Time) time.Time {
+	year, month, day := now.Date()
+	hour, minute := now.Hour(), now.Minute()
+	t := time.Date(year, month, day, hour, minute, 0, 0, now.Location())
+	return t
+}
